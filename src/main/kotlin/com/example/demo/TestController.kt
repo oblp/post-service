@@ -1,18 +1,23 @@
 package com.example.demo
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import reactor.core.publisher.Flux
-import java.time.Duration
+import com.example.demo.model.entity.Test
+import com.example.demo.repository.TestRepository
+import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/test")
-class TestController {
+class TestController
+constructor(val testRepository: TestRepository) {
 
     @GetMapping
-    fun test(): Flux<Long> {
-        return Flux.interval(Duration.ofMillis(200)).take(10)
+    @RequestMapping("/{id}")
+    fun test(@PathVariable(name = "id") id: Int): Optional<Test> {
+        return testRepository.findById(id)
     }
 
+    @PostMapping
+    fun test(@RequestBody test: Test): Test {
+        return testRepository.save(test)
+    }
 }
