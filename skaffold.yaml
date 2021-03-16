@@ -1,0 +1,6 @@
+apiVersion: skaffold/v2beta11
+kind: Config
+build:
+  artifacts:
+  - image: eastack/skaffold-example
+    jib: {}
