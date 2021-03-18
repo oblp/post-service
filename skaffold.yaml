@@ -3,4 +3,5 @@ kind: Config
 build:
   artifacts:
   - image: eastack/skaffold-example
-    jib: {}
+    jib:
+      project: oblp-post-service-api
