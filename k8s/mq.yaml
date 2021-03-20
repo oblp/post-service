@@ -18,7 +18,7 @@ spec:
     matchLabels:
       app: rabbitmq
   strategy:
-    type: Recreate
+      type: Recreate
   template:
     metadata:
       labels:
@@ -27,63 +27,6 @@ spec:
       containers:
         - name: rabbitmq
           image: rabbitmq:3.8.14
-          env:
-            - name: MYSQL_ROOT_PASSWORD
-              value: helloworld
-            - name: MYSQL_DATABASE
-              value: test
           ports:
-            - containerPort: 3306
-              name: mysql
-#          volumeMounts:
-#            - name: mysql-persistent-storage
-#              mountPath: /var/lib/mysql
-#            - name: dbinit-volume
-#              mountPath: /docker-entrypoint-initdb.d
-#      volumes:
-#        - name: mysql-persistent-storage
-#          persistentVolumeClaim:
-#            claimName: mysql-pv-claim
-#        - name: dbinit-volume
-#          configMap:
-#            defaultMode: 0644
-#            items:
-#              - key: dbinit.sql
-#                path: dbinit.sql
-#            name: dbinit
-#---
-#apiVersion: v1
-#kind: PersistentVolume
-#metadata:
-#  name: mysql-pv-volume
-#  labels:
-#    type: local
-#spec:
-#  storageClassName: manual
-#  capacity:
-#    storage: 20Gi
-#  accessModes:
-#    - ReadWriteOnce
-#  hostPath:
-#    path: "/mnt/data"
-#---
-#apiVersion: v1
-#data:
-#  dbinit.sql: |
-#    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'helloworld' WITH GRANT OPTION;
-#    FLUSH PRIVILEGES;
-#kind: ConfigMap
-#metadata:
-#  name: dbinit
-#---
-#apiVersion: v1
-#kind: PersistentVolumeClaim
-#metadata:
-#  name: mysql-pv-claim
-#spec:
-#  storageClassName: manual
-#  accessModes:
-#    - ReadWriteOnce
-#  resources:
-#    requests:
-#      storage: 20Gi
+            - containerPort: 5672
+              name: rabbitmq

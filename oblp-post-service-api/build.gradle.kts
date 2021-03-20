@@ -10,20 +10,25 @@ plugins {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-amqp")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-	implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
-	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	// support
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-//	runtimeOnly("mysql:mysql-connector-java")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
+	implementation("org.springframework.boot:spring-boot-starter-amqp")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
+
+
+	runtimeOnly("mysql:mysql-connector-java")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
+	testImplementation("org.springframework.amqp:spring-rabbit-test")
 
 	implementation(project(":oblp-post-service-sdk"))
 }
@@ -41,7 +46,7 @@ tasks.withType<Test> {
 
 jib {
 	from {
-		image = "openjdk@sha256:3d35137579870e9b53716879449aa88d0e455fe725ac4e60c20b25761e789993"
+		image = "openjdk@sha256:d112a532f300ce7d35f5cd196c22fced33d0a28a7dd0227019da5fb430528428"
 	}
 	container {
 		ports = listOf("8080")
