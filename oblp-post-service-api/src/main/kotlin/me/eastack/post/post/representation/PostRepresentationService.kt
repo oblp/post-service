@@ -19,6 +19,9 @@ class PostRepresentationService(var postRepository: PostRepository) {
 
     @Transactional
     fun save(createPostCommand: CreatePostCommand): PostRepresentation {
-
+        with(createPostCommand) {
+            postRepository.save(Post(id, title, author, content))
+            return PostRepresentation(id, title, author, content)
+        }
     }
 }

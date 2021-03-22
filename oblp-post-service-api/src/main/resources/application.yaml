@@ -8,6 +8,10 @@ spring:
     url: jdbc:mysql://mysql:3306/test
     username: root
     password: helloworld
+
   jpa:
     hibernate:
       ddl-auto: update
+
+  rabbitmq:
+    host: rabbitmq
