@@ -17,7 +17,7 @@ class PostController(val postRepresentationService: PostRepresentationService) {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    fun add(createPostCommand: CreatePostCommand): PostRepresentation {
+    fun add(@RequestBody createPostCommand: CreatePostCommand): PostRepresentation {
         return postRepresentationService.save(createPostCommand)
     }
 
