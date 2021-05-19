@@ -1,2 +1,2 @@
-rootProject.name = "oblp-post-service"
-include("oblp-post-service-api", "oblp-post-service-sdk")
+rootProject.name = "post-service"
+include("post-service-api", "post-service-sdk")

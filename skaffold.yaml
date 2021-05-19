@@ -2,6 +2,14 @@ apiVersion: skaffold/v2beta11
 kind: Config
 build:
   artifacts:
-  - image: eastack/skaffold-example
-    jib:
-      project: oblp-post-service-api
+    - image: registry.cn-beijing.aliyuncs.com/oblp/post-service
+      jib:
+        project: post-service-api
+deploy:
+  kubectl:
+    manifests:
+      - development/deployment.yaml
+      - development/service.yaml
+      - development/ingress.yaml
+profiles:
+  - name: develop
