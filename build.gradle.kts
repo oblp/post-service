@@ -15,9 +15,6 @@ repositories {
 	mavenLocal()
 }
 
-dependencies {
-}
-
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		jvmTarget = "11"

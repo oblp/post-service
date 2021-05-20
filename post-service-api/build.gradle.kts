@@ -34,7 +34,11 @@ dependencies {
     testImplementation("org.springframework.amqp:spring-rabbit-test")
 
     implementation(project(":post-service-sdk"))
-    implementation("me.eastack.oblp:shared-model:0.0.1")
+    implementation("me.eastack.oblp:shared-model:0.0.1-SNAPSHOT")
+}
+
+springBoot {
+    buildInfo()
 }
 
 tasks.withType<KotlinCompile> {

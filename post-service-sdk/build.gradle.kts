@@ -4,9 +4,6 @@ plugins {
 	kotlin("jvm")
 }
 
-dependencies {
-}
-
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		jvmTarget = "11"

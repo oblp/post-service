@@ -12,4 +12,8 @@ deploy:
       - development/service.yaml
       - development/ingress.yaml
 profiles:
-  - name: develop
+  - name: testing-profile
+  - name: staging-profile
+  - name: production-profile
+  - name: development-profile
+
