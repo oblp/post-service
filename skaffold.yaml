@@ -4,13 +4,11 @@ build:
   artifacts:
     - image: registry.cn-beijing.aliyuncs.com/oblp/post-service
       jib:
-        project: post-service-api
+        project: article-service-api
 deploy:
   kubectl:
     manifests:
-      - development/deployment.yaml
-      - development/service.yaml
-      - development/ingress.yaml
+      - k8s/development/main.yaml
 profiles:
   - name: testing-profile
   - name: staging-profile
