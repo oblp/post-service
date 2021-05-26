@@ -1,0 +1,48 @@
+apply plugin: 'org.asciidoctor.jvm.convert'
+apply plugin: 'com.google.cloud.tools.jib'
+
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+}
+
+configurations {
+    asciidoctorExtensions
+}
+
+dependencies {
+    // Web
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // Tests & Docs
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient'
+    asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+
+    // Project
+    implementation project(':article-application')
+}
+
+test {
+    outputs.dir snippetsDir
+    useJUnitPlatform()
+}
+
+asciidoctor {
+    configurations 'asciidoctorExtensions'
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+jib {
+    extraDirectories.paths {
+        path {
+            from = asciidoctor.outputDir
+            into = '/app/resources/static/'
+        }
+    }
+}
+
+springBoot {
+    buildInfo()
+}

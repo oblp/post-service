@@ -1,0 +1,6 @@
+dependencies {
+    // JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // DB Driver
+    runtimeOnly 'mysql:mysql-connector-java'
+}
