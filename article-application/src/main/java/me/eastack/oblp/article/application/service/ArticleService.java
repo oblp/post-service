@@ -1,7 +1,7 @@
 package me.eastack.oblp.article.application.service;
 
 import lombok.RequiredArgsConstructor;
-import me.eastack.oblp.article.application.dto.command.NewArticleCommand;
+import me.eastack.oblp.article.application.command.NewArticleCommand;
 import org.springframework.stereotype.Service;
 
 @Service

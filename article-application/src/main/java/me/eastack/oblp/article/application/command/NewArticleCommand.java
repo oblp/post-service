@@ -1,4 +1,4 @@
-package me.eastack.oblp.article.application.dto.command;
+package me.eastack.oblp.article.application.command;
 
 import lombok.Data;
 

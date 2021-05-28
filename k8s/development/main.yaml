@@ -6,9 +6,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-    - http:
+    - host: "article.eastack.xyz"
+      http:
         paths:
-          - path: /web(/|$)(.*)
+          - path: /api(/|$)(.*)
             pathType: Prefix
             backend:
               service:
@@ -45,6 +46,6 @@ spec:
         - name: aliyun-docker-registry
       containers:
         - name: post-service
-          image: registry.cn-beijing.aliyuncs.com/oblp/post-service:8c99ca5-dirty
+          image: registry.cn-beijing.aliyuncs.com/oblp/post-service
           ports:
             - containerPort: 8080

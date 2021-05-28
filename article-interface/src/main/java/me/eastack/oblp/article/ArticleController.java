@@ -1,7 +1,7 @@
 package me.eastack.oblp.article;
 
 import lombok.RequiredArgsConstructor;
-import me.eastack.oblp.article.application.dto.command.NewArticleCommand;
+import me.eastack.oblp.article.application.command.NewArticleCommand;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +13,9 @@ import reactor.core.publisher.Mono;
 @Component
 public class ArticleController {
 
-    @GetMapping("/classpath")
-    public Mono<String> publish(@Validated NewArticleCommand newArticleCommand) {
-        return Mono.empty();
+    @PostMapping
+    public Mono<NewArticleCommand> publish(@RequestBody @Validated NewArticleCommand newArticleCommand) {
+        return Mono.just(newArticleCommand);
     }
 
     @GetMapping("/{id:\\d+}")
