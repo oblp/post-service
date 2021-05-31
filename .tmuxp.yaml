@@ -1,0 +1,13 @@
+session_name: eastack-article-service
+shell_command_before: cd ~/desktop/personal/eastack-projects/eastack-article-service
+windows:
+- window_name: main
+  focus: yes
+  panes:
+    - v
+- window_name: remote
+  panes:
+    - ssh -L 127.0.0.131542:172.28.128.4:31542 company
+- window_name: sync
+  panes:
+    - scripts/auto-sync.sh
