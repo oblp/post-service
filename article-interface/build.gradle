@@ -13,12 +13,11 @@ dependencies {
     // Web
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
-    // Security
-    implementation 'org.springframework.boot:spring-boot-starter-security'
 
-    // Tests & Docs
-    asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
-    testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient'
+    // Security
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Tests
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'io.projectreactor:reactor-test'
@@ -31,23 +30,6 @@ test {
     outputs.dir snippetsDir
     useJUnitPlatform()
 }
-
-asciidoctor {
-    configurations 'asciidoctorExtensions'
-    inputs.dir snippetsDir
-    dependsOn test
-}
-
-jib {
-    extraDirectories.paths {
-        path {
-            from = asciidoctor.outputDir
-            into = '/app/resources/static/'
-        }
-    }
-}
-
-tasks.jib.dependsOn asciidoctor
 
 springBoot {
     buildInfo()
