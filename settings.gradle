@@ -1,2 +1,2 @@
 rootProject.name = 'eastack-article-service'
-include('article-interface', 'article-application', 'article-domain', 'article-infrastructure')
+include('article-api', 'article-sdk')

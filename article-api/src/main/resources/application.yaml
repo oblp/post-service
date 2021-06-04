@@ -1,0 +1,6 @@
+debug: true
+spring:
+  rabbitmq:
+    host: rabbitmq
+    username: root
+    password: Cti2013

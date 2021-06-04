@@ -1,7 +1,4 @@
 = README
 
-DDD Git Flow
-
 == Question
 
-Spring Rest Docs too many break change.

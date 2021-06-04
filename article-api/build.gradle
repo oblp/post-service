@@ -1,0 +1,49 @@
+apply plugin: 'org.asciidoctor.jvm.convert'
+apply plugin: 'com.google.cloud.tools.jib'
+
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+}
+
+configurations {
+    asciidoctorExtensions
+}
+
+dependencies {
+    // Web
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    // Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // Security
+    // implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Message queue
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+    // Database
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'dev.miku:r2dbc-mysql'
+
+    // Tests
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'io.projectreactor:reactor-test'
+
+    // Utils
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+    // Project
+    implementation project(':article-sdk')
+}
+
+test {
+    outputs.dir snippetsDir
+    useJUnitPlatform()
+}
+
+springBoot {
+    buildInfo()
+}

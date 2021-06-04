@@ -1,0 +1,12 @@
+digraph 文章状态 {
+  graph [fontname="Helvetica-Oblique", fontsize=13, label="\n文章生命周期"];
+  node [color="#989ea3", style=filled] deleted;
+  node [color="#e2d5b0", style=filled, fontname="Helvetica-Outline"];
+
+  created[label="新建:CREATED", shape=diamond, style = "rounded,filled"];
+  published[label="已发布:PUBLISHED"];
+  deleted[label="已删除:DELETED"];
+
+  created->published[label="发布"]
+  published->deleted[label="删除"]
+}
