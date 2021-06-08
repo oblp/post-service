@@ -1,4 +1,12 @@
 = README
 
-== Question
 
+== To Do
+
+* i18n
+  - time
+  - lang
+
+== References
+
+* https://github.com/vert-x3/vertx-stack/blob/master/stack-docker/src/main/asciidoc/index.adoc[Vert.x Docker Images]

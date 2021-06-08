@@ -1,0 +1,3 @@
+[submodule "article-api/src/main/proto"]
+	path = article-api/src/main/proto
+	url = git@github.com:eastack-projects/eastack-protocol-buffers.git

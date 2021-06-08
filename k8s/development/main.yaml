@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-    - host: "article.eastack.xyz"
+    - host: "api.eastack.cn/article"
       http:
         paths:
           - path: /api(/|$)(.*)

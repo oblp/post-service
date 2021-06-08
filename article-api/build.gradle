@@ -1,37 +1,23 @@
-apply plugin: 'org.asciidoctor.jvm.convert'
-apply plugin: 'com.google.cloud.tools.jib'
-
-ext {
-    set('snippetsDir', file("build/generated-snippets"))
-}
-
-configurations {
-    asciidoctorExtensions
-}
+apply plugin: 'io.vertx.vertx-plugin'
+apply plugin: 'com.google.protobuf'
 
 dependencies {
     // Web
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    // Validation
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    // Security
-    // implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.vertx:vertx-web'
 
-    // Message queue
-    implementation 'org.springframework.boot:spring-boot-starter-amqp'
-
-    // Database
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
-    runtimeOnly 'mysql:mysql-connector-java'
-    runtimeOnly 'dev.miku:r2dbc-mysql'
-
-    // Tests
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
-    testImplementation 'io.projectreactor:reactor-test'
+    // GRPC
+    implementation 'io.vertx:vertx-grpc'
+    implementation 'io.grpc:grpc-netty-shaded:1.38.0'
+    implementation 'io.grpc:grpc-protobuf:1.38.0'
+    implementation 'io.grpc:grpc-stub:1.38.0'
 
     // Utils
+    // lombok
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    // mapstruct
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
@@ -39,11 +25,26 @@ dependencies {
     implementation project(':article-sdk')
 }
 
-test {
-    outputs.dir snippetsDir
-    useJUnitPlatform()
+vertx {
+    mainVerticle = 'cn.eastack.article.interfaces.MainVerticle'
 }
 
-springBoot {
-    buildInfo()
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.2.0'
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.25.0"
+        }
+        vertx {
+            artifact = "io.vertx:vertx-grpc-protoc-plugin:4.0.0"
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+            vertx {}
+        }
+    }
 }
