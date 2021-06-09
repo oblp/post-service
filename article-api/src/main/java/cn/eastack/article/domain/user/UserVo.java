@@ -3,7 +3,7 @@ package cn.eastack.article.domain.user;
 import lombok.Data;
 
 @Data
-public class User {
+public class UserVo {
     private Integer id;
     private String name;
 }

@@ -1,11 +1,13 @@
 package cn.eastack.article.application.command;
 
 import lombok.Data;
+
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Set;
 
 @Data
-public class CreateArticleCommand {
+public class CreateArticleCommand implements Serializable {
     private String coverId;
     private String title;
     private String content;

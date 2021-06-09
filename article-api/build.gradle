@@ -2,31 +2,35 @@ apply plugin: 'io.vertx.vertx-plugin'
 apply plugin: 'com.google.protobuf'
 
 dependencies {
-    // Web
-    implementation 'io.vertx:vertx-web'
-
-    // GRPC
-    implementation 'io.vertx:vertx-grpc'
-    implementation 'io.grpc:grpc-netty-shaded:1.38.0'
-    implementation 'io.grpc:grpc-protobuf:1.38.0'
-    implementation 'io.grpc:grpc-stub:1.38.0'
+    // Vert.x
+    implementation('io.vertx:vertx-web')
+    implementation('io.vertx:vertx-grpc')
+    implementation("io.vertx:vertx-config")
+    implementation("io.vertx:vertx-pg-client")
+    testImplementation("io.vertx:vertx-junit5")
 
     // Utils
     // lombok
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
-    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
     // mapstruct
-    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    implementation("org.mapstruct:mapstruct:${mapstructVersion}")
+    annotationProcessor("org.mapstruct:mapstruct-processor:${mapstructVersion}")
+    // jackson
+    implementation('com.fasterxml.jackson.core:jackson-databind:2.12.3')
+    // grpc annotation
+    compileOnly('org.apache.tomcat:annotations-api:6.0.53') // for java9+
+    // guice
+    implementation('com.google.inject:guice:4.1.0')
 
     // Project
-    implementation project(':article-sdk')
+    implementation(project(':article-sdk'))
 }
 
 vertx {
-    mainVerticle = 'cn.eastack.article.interfaces.MainVerticle'
+    mainVerticle = 'cn.eastack.article.adapter.inbound.rest.ArticleVerticle'
 }
 
 protobuf {

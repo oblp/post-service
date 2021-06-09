@@ -11,7 +11,8 @@ public class Article {
     private String title;
     private String content;
     private ArticleId id;
-    private AuthorId author;
+    private AuthorId authorId;
+    private Author author;
     private Set<TagId> tags;
     private ArticleStatus status;
     private ArticleVisibility visibility;
