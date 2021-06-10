@@ -1,5 +1,4 @@
-package cn.eastack.article.adapter.inbound.rest;
-
+package cn.eastack.article.adapter.rest;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.impl.logging.Logger;
@@ -9,8 +8,8 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 
-public class AboutVerticle extends AbstractVerticle {
-    private static final Logger logger = LoggerFactory.getLogger(AboutVerticle.class);
+public class AboutConfigVerticle extends AbstractVerticle {
+    private static final Logger logger = LoggerFactory.getLogger(AboutConfigVerticle.class);
 
     @Override
     public void start() {

@@ -1,12 +1,9 @@
-package cn.eastack.article.adapter.inbound.rest;
+package cn.eastack.article.adapter.rest;
 
 import cn.eastack.article.application.ArticleApplicationService;
 import cn.eastack.article.application.command.CreateArticleCommand;
-import cn.eastack.article.domain.article.ArticleService;
-import cn.eastack.article.domain.user.UserService;
-import com.google.inject.Guice;
+import cn.eastack.article.application.representation.ArticleRepresentation;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.MultiMap;
@@ -19,18 +16,20 @@ import io.vertx.ext.web.handler.BodyHandler;
 import lombok.RequiredArgsConstructor;
 
 @Singleton
-public class ArticleVerticle extends AbstractVerticle {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ArticleVerticle.class);
+@RequiredArgsConstructor(onConstructor = @__({@Inject}))
+public class ArticleApiVerticle extends AbstractVerticle {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ArticleApiVerticle.class);
     private static final String ARTICLE = "/articles";
     private static final Integer PORT = 9999;
-    @Inject
-    private ArticleApplicationService articleApplicationService;
+
+    private final ArticleApplicationService articleApplicationService;
 
     @Override
     public void start() {
         Router router = Router.router(vertx);
 
         router.post().handler(BodyHandler.create());
+
         router.post(ARTICLE).handler(this::create);
         router.get(ARTICLE).handler(this::list);
         router.get(ARTICLE + "/:articleId").handler(this::detail);
@@ -56,11 +55,14 @@ public class ArticleVerticle extends AbstractVerticle {
     }
 
     public void create(RoutingContext ctx) {
-        CreateArticleCommand createArticleCommand = new CreateArticleCommand();
-        ctx.json(articleApplicationService.createArticle(1, createArticleCommand))
-            .onFailure(err -> {
-                LOGGER.error(err.getMessage());
-                err.printStackTrace();
-            });
+        CreateArticleCommand command = ctx.getBodyAsJson().mapTo(CreateArticleCommand.class);
+        Integer userId = ctx.queryParam("userId").stream()
+            .map(Integer::parseInt)
+            .findAny()
+            .orElse(1996);
+
+        ArticleRepresentation represent = articleApplicationService.createArticle(userId, command);
+
+        ctx.json(represent);
     }
 }

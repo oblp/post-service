@@ -1,8 +1,6 @@
-# Extend vert.x image
 FROM vertx/vertx4
 
-#                                                       (1)
-ENV VERTICLE_NAME cn.eastack.article.adapter.inbound.rest.ArticleVerticle
+ENV VERTICLE_NAME ArticleVerticle
 ENV VERTICLE_FILE build/libs/article-api-0.0.1-SNAPSHOT-all.jar
 
 # Set the location of the verticles

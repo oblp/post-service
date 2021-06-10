@@ -11,6 +11,6 @@ public interface ArticleBeanMapper {
     ArticleBeanMapper INSTANCE = Mappers.getMapper(ArticleBeanMapper.class);
 
 
-    @Mapping(source = "title", target = "title")
-    ArticleRepresentation toR(Article article);
+//    @Mapping(source = "title", target = "title")
+//    ArticleRepresentation toR(Article article);
 }

@@ -1,11 +1,11 @@
-package cn.eastack.article.adapter.outbound.grpc;
+package cn.eastack.article.adapter.rpc;
 
 import cn.eastack.user.grpc.User;
 import cn.eastack.user.grpc.UserServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.vertx.grpc.VertxChannelBuilder;
 
-public class UserGateway {
+public class UserServiceStub {
     private static final String USER_GRPC_ADDRESS = "localhost:50051";
     private static final ManagedChannel CHANNEL = VertxChannelBuilder
         .forTarget(USER_GRPC_ADDRESS)

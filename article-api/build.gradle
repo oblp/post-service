@@ -30,7 +30,7 @@ dependencies {
 }
 
 vertx {
-    mainVerticle = 'cn.eastack.article.adapter.inbound.rest.ArticleVerticle'
+    mainVerticle = 'cn.eastack.article.adapter.rest.ArticleConfigVerticle'
 }
 
 protobuf {
