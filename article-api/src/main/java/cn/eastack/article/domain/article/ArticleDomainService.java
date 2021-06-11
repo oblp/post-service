@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 
 @Singleton
 @RequiredArgsConstructor(onConstructor = @__({@Inject}))
-public class ArticleService {
+public class ArticleDomainService {
     public Article createArticle(Article article) {
         article.setStatus(ArticleStatus.Created);
         return article;

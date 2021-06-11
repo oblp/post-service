@@ -4,7 +4,7 @@ import cn.eastack.article.application.command.CreateArticleCommand;
 import cn.eastack.article.application.command.UpdateDraftCommand;
 import cn.eastack.article.application.representation.ArticleRepresentation;
 import cn.eastack.article.domain.article.Article;
-import cn.eastack.article.domain.article.ArticleService;
+import cn.eastack.article.domain.article.ArticleDomainService;
 import cn.eastack.article.domain.article.Author;
 import cn.eastack.article.domain.user.UserService;
 import cn.eastack.article.domain.user.UserVo;
@@ -16,7 +16,7 @@ import javax.inject.Singleton;
 @Singleton
 @RequiredArgsConstructor(onConstructor = @__({@Inject}))
 public class ArticleApplicationService {
-    private final ArticleService articleService;
+    private final ArticleDomainService articleService;
     private final UserService userService;
 
     public ArticleRepresentation createArticle(Integer authorId, CreateArticleCommand command) {

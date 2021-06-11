@@ -1,5 +1,26 @@
 = README
 
+== Build and Run
+
+.Clone repository
+[source, bash]
+----
+git clone https://github.com/eastack-project/eastack-article-service/
+cd eastack-article-service
+----
+
+.Get protobuf definitions
+[source, bash]
+----
+git submodule init
+git submodule update
+----
+
+.Build and Run
+[source, bash]
+----
+./gradlew vertxRun
+----
 
 == To Do
 

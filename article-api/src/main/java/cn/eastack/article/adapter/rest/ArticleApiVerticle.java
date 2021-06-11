@@ -3,6 +3,7 @@ package cn.eastack.article.adapter.rest;
 import cn.eastack.article.application.ArticleApplicationService;
 import cn.eastack.article.application.command.CreateArticleCommand;
 import cn.eastack.article.application.representation.ArticleRepresentation;
+import cn.eastack.article.domain.tag.TagRepository;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import io.vertx.core.AbstractVerticle;
@@ -23,6 +24,7 @@ public class ArticleApiVerticle extends AbstractVerticle {
     private static final Integer PORT = 9999;
 
     private final ArticleApplicationService articleApplicationService;
+    private final TagRepository tagRepository;
 
     @Override
     public void start() {
@@ -50,8 +52,14 @@ public class ArticleApiVerticle extends AbstractVerticle {
 
     public void detail(RoutingContext ctx) {
         Integer articleId = Integer.parseInt(ctx.pathParam("articleId"));
-        ctx.json(new JsonObject()
-            .put("name", "Bob"));
+        tagRepository.getTag(vertx).onSuccess(tags -> {
+                JsonObject entries = new JsonObject();
+                tags.forEach(t -> {
+                    entries.put(t.getName(), t.getId());
+                });
+                ctx.json(entries);
+            }
+        );
     }
 
     public void create(RoutingContext ctx) {

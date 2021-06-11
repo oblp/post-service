@@ -3,10 +3,12 @@ apply plugin: 'com.google.protobuf'
 
 dependencies {
     // Vert.x
-    implementation('io.vertx:vertx-web')
-    implementation('io.vertx:vertx-grpc')
+    compileOnly("io.vertx:vertx-web")
+    implementation("io.vertx:vertx-web")
+    implementation("io.vertx:vertx-grpc")
     implementation("io.vertx:vertx-config")
     implementation("io.vertx:vertx-pg-client")
+    implementation("io.vertx:vertx-sql-client-templates")
     testImplementation("io.vertx:vertx-junit5")
 
     // Utils
